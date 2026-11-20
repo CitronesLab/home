@@ -1,0 +1,17 @@
+{
+  "site_title": "Mi Bitácora Personal",
+  "topics": [
+    {
+      "id": "tecnologia",
+      "title": "Tecnología y Software",
+      "preview": "Explorando las últimas herramientas de desarrollo y gadgets.",
+      "content": "<h2>Mi nuevo setup de desarrollo</h2><p>Hoy actualicé mi entorno a Linux Debian y estoy usando VS Code con nuevas extensiones...</p>"
+    },
+    {
+      "id": "musica",
+      "title": "Producción Musical",
+      "preview": "Bitácora sobre síntesis modular y grabación.",
+      "content": "<h2>Explorando VCV Rack</h2><p>He estado experimentando con la polifonía en módulos virtuales. El secreto está en el enrutamiento...</p>"
+    }
+  ]
+}
