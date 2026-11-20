@@ -1,6 +1,6 @@
 {
   "site_title": "CitronesLab",
-  "site_description": "Bitácora de proyectos DIY que avanzo en paralelo: electrónica, código y experimentos cítricos.",
+  "site_description": "Bitácora de avances en los distintos proyectos: electrónica, código y experimentos cítricos.",
   "projects": [
     {
       "id": "huerto-inteligente",
