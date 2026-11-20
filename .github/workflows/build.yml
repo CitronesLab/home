@@ -1,0 +1,36 @@
+name: Generar Bitacora
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'content/posts.json' # Solo se activa si modificas el JSON
+  workflow_dispatch: # Permite activarlo manualmente desde la pestaña "Actions"
+
+permissions:
+  contents: write # Permite al Action hacer commit de los HTML generados
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          
+      - name: Ejecutar generador
+        run: python generator.py
+        
+      - name: Guardar cambios en el repositorio
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+          git add index.html posts/
+          # Solo hace commit si hay cambios reales
+          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Actualización automática de contenido"
+          git push
