@@ -1,17 +1,132 @@
 {
-  "site_title": "Mi Bitácora Personal",
-  "topics": [
+  "site_title": "CitronesLab",
+  "site_description": "Bitácora de proyectos DIY que avanzo en paralelo: electrónica, código y experimentos cítricos.",
+  "projects": [
     {
-      "id": "tecnologia",
-      "title": "Tecnología y Software",
-      "preview": "Explorando las últimas herramientas de desarrollo y gadgets.",
-      "content": "<h2>Mi nuevo setup de desarrollo</h2><p>Hoy actualicé mi entorno a Linux Debian y estoy usando VS Code con nuevas extensiones...</p>"
+      "id": "huerto-inteligente",
+      "title": "Huerto Inteligente",
+      "description": "Sistema de riego automatizado con sensores de humedad, ESP32 y panel solar.",
+      "cover": "https://picsum.photos/seed/huerto/800/450",
+      "entries": [
+        {
+          "date": "2025-03-12",
+          "title": "Sensores calibrados y primer riego automático",
+          "content": "<p>Después de varias iteraciones logré calibrar los sensores capacitivos de humedad usando una curva de dos puntos. El ESP32 ya dispara la bomba cuando el sustrato baja del 28%.</p><p>Próximo paso: registrar las lecturas en una microSD para tener histórico.</p>",
+          "media": [
+            { "type": "image", "src": "https://picsum.photos/seed/huerto1/800/450", "caption": "Sensor enterrado junto al gotero." }
+          ]
+        },
+        {
+          "date": "2025-02-28",
+          "title": "Panel solar instalado y primera carga completa",
+          "content": "<p>Monté un panel de 6W con un TP4056 y batería 18650. En un día nublado sigue dando para dos riegos diarios.</p>",
+          "media": [
+            { "type": "image", "src": "https://picsum.photos/seed/huerto2/800/450", "caption": "Panel inclinado 30° hacia el norte." }
+          ]
+        },
+        {
+          "date": "2025-02-14",
+          "title": "Caja estanca para el ESP32",
+          "content": "<p>Usé una caja IP65 con prensaestopas para los cables de sensores. La humedad del invernadero no perdona.</p>",
+          "media": [
+            { "type": "image", "src": "https://picsum.photos/seed/huerto3/800/450" }
+          ]
+        },
+        {
+          "date": "2025-01-30",
+          "title": "Bomba de agua y relé funcionando",
+          "content": "<p>Probando el relé con la bomba sumergible de 5V. Aquí un video del primer disparo automático:</p>",
+          "media": [
+            { "type": "youtube", "id": "jNQXAC9IVRw" }
+          ]
+        },
+        {
+          "date": "2025-01-18",
+          "title": "Primer prototipo en protoboard",
+          "content": "<p>Todo el circuito funcionando en protoboard antes de soldar. El sensor DHT22 lee temperatura y humedad ambiente como control extra.</p>",
+          "media": [
+            { "type": "image", "src": "https://picsum.photos/seed/huerto4/800/450" }
+          ]
+        },
+        {
+          "date": "2025-01-05",
+          "title": "Diseño del circuito en papel",
+          "content": "<p>Antes de tocar un solo cable, dibujé el esquema completo. Cambié de relé mecánico a SSR para evitar ruido.</p>",
+          "media": [
+            { "type": "image", "src": "https://picsum.photos/seed/huerto5/800/450" }
+          ]
+        },
+        {
+          "date": "2024-12-20",
+          "title": "Compra de materiales",
+          "content": "<p>Lista completa: ESP32, sensor capacitivo, DHT22, relé SSR, bomba 5V, panel 6W, TP4056, batería 18650, cables y caja IP65.</p>",
+          "media": [
+            { "type": "image", "src": "https://picsum.photos/seed/huerto6/800/450" }
+          ]
+        },
+        {
+          "date": "2024-12-10",
+          "title": "Idea inicial del huerto",
+          "content": "<p>Quiero automatizar el riego de las macetas del balcón. Objetivo: que pueda irme una semana de viaje sin que las plantas sufran.</p>",
+          "media": []
+        }
+      ]
     },
     {
-      "id": "musica",
-      "title": "Producción Musical",
-      "preview": "Bitácora sobre síntesis modular y grabación.",
-      "content": "<h2>Explorando VCV Rack</h2><p>He estado experimentando con la polifonía en módulos virtuales. El secreto está en el enrutamiento...</p>"
+      "id": "sintetizador-citrico",
+      "title": "Sintetizador Cítrico",
+      "description": "Sintetizador analógico-experimental con frutas como resistencias variables.",
+      "cover": "https://picsum.photos/seed/synth/800/450",
+      "entries": [
+        {
+          "date": "2025-03-05",
+          "title": "Secuenciador básico funcionando",
+          "content": "<p>El secuenciador de 8 pasos ya recorre notas. Aquí suena por primera vez con el filtro abierto:</p>",
+          "media": [
+            { "type": "youtube", "id": "aqz-KE-bpKQ" }
+          ]
+        },
+        {
+          "date": "2025-02-20",
+          "title": "Filtro paso bajo con LM13700",
+          "content": "<p>Diseñé un VCF de 2 polos basado en el LM13700. Suena cálido, ideal para las texturas que busco.</p>",
+          "media": [
+            { "type": "image", "src": "https://picsum.photos/seed/synth2/800/450" }
+          ]
+        },
+        {
+          "date": "2025-02-01",
+          "title": "Primer oscilador (VCO)",
+          "content": "<p>El corazón del proyecto: un oscilador exponencial con CEM3340. Primera onda diente de sierra en el osciloscopio.</p>",
+          "media": [
+            { "type": "image", "src": "https://picsum.photos/seed/synth3/800/450" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mesa-trabajo",
+      "title": "Mesa de Trabajo",
+      "description": "Construcción de un banco de electrónica con estantes y organizador de herramientas.",
+      "cover": "https://picsum.photos/seed/mesa/800/450",
+      "entries": [
+        {
+          "date": "2025-01-22",
+          "title": "Estructura de madera terminada",
+          "content": "<p>El banco aguanta sin problema el osciloscopio y la fuente. Le puse una regleta con interruptor en la parte trasera.</p>",
+          "media": [
+            { "type": "image", "src": "https://picsum.photos/seed/mesa2/800/450" }
+          ]
+        },
+        {
+          "date": "2025-01-10",
+          "title": "Planos y corte de madera",
+          "content": "<p>Corté los listones de pino a 1.40m de alto y 1.80m de ancho. La idea es tener dos niveles de estante.</p>",
+          "media": [
+            { "type": "image", "src": "https://picsum.photos/seed/mesa3/800/450" }
+          ]
+        }
+      ]
     }
   ]
 }
