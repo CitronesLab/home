@@ -4,6 +4,7 @@ import math
 import re
 from string import Template
 from datetime import datetime
+from urllib.parse import quote
 
 PER_PAGE = 7
 MONTHS_ES = ['enero','febrero','marzo','abril','mayo','junio',
@@ -25,17 +26,19 @@ def make_preview(text, length=160):
         t = t[:length].rsplit(' ', 1)[0] + '…'
     return t
 
-def render_media(media):
+def render_media(media, project_id, fallback_alt=''):
     if not media:
         return ''
     out = ['<div class="media">']
     for m in media:
         t = m.get('type')
         if t == 'image':
+            url = resolve_src(m.get('src', ''), project_id, base='posts')
+            alt = m.get('alt') or m.get('caption') or fallback_alt
             cap = f'<figcaption>{m["caption"]}</figcaption>' if m.get('caption') else ''
             out.append(
-                f'<figure><img src="{m["src"]}" alt="{m.get("alt", "")}" '
-                f'loading="lazy">{cap}</figure>'
+                f'<figure><img src="{url}" alt="{alt}" '
+                f'loading="lazy" decoding="async">{cap}</figure>'
             )
         elif t == 'youtube':
             out.append(
@@ -49,12 +52,13 @@ def render_media(media):
     return '\n'.join(out)
 
 def render_entry(entry):
+    def render_entry(entry, project_id):
     return f"""
     <article class="entry">
       <div class="entry-date">{format_date(entry.get('date', ''))}</div>
       <h2>{entry.get('title', '')}</h2>
       <div class="content">{entry.get('content', '')}</div>
-      {render_media(entry.get('media', []))}
+      {render_media(entry.get('media', []), project_id, fallback_alt=entry.get('title', ''))}
     </article>
     """
 
@@ -83,6 +87,12 @@ def generate_site():
     cards = []
 
     for p in projects:
+        img_dir = os.path.join('images', pid)
+        os.makedirs(img_dir, exist_ok=True)
+        gitkeep = os.path.join(img_dir, '.gitkeep')
+        if not os.path.exists(gitkeep):
+            open(gitkeep, 'w').close()
+    
         pid     = p['id']
         ptitle  = p['title']
         pdesc   = p.get('description', '')
@@ -101,8 +111,8 @@ def generate_site():
             preview = 'Este proyecto todavía no tiene entradas.'
             date_line = 'Sin entradas aún'
 
-        cover_html = (f'<img class="cover" src="{cover}" alt="{ptitle}" loading="lazy">'
-                      if cover else '')
+        cover_html = (f'<img class="cover" src="{resolve_src(cover, pid, base="root")}" '
+              f'alt="{ptitle}" loading="lazy">' if cover else '')
 
         cards.append(f"""
         <div class="card">
@@ -125,7 +135,7 @@ def generate_site():
             page_num = i + 1
             chunk = entries[i * PER_PAGE:(i + 1) * PER_PAGE]
 
-            entries_html = ''.join(render_entry(e) for e in chunk)
+            entries_html = ''.join(render_entry(e, pid) for e in chunk)
             if total == 0:
                 entries_html = ('<p style="color:#9a9aa5">'
                                 'Aún no hay entradas en este proyecto.</p>')
@@ -172,5 +182,53 @@ def generate_site():
 
     print('✅ Sitio CitronesLab generado correctamente.')
 
+def resolve_src(src, project_id, base='posts'):
+    """
+    Resuelve el src de una imagen.
+    - Si es una URL absoluta (http/https/data), la deja tal cual.
+    - Si es un nombre relativo, lo mapea a images/<project_id>/<nombre>.
+    - base='posts' → prefijo '../images' (desde posts/*.html)
+    - base='root'  → prefijo 'images'   (desde index.html)
+    """
+    if not src:
+        return ''
+    src = src.strip()
+    if src.startswith(('http://', 'https://', 'data:', '//')):
+        return src
+
+    # Tolerar que el usuario escriba "images/huerto-inteligente/foto.jpg"
+    for pref in (f'images/{project_id}/', f'/images/{project_id}/'):
+        if src.startswith(pref):
+            src = src[len(pref):]
+
+    prefix = '../images' if base == 'posts' else 'images'
+    # quote() preserva '/' pero codifica espacios y acentos → rutas web válidas
+    return quote(f'{prefix}/{project_id}/{src}')
+
+def render_media(media, project_id, fallback_alt=''):
+    if not media:
+        return ''
+    out = ['<div class="media">']
+    for m in media:
+        t = m.get('type')
+        if t == 'image':
+            url = resolve_src(m.get('src', ''), project_id, base='posts')
+            alt = m.get('alt') or m.get('caption') or fallback_alt
+            cap = f'<figcaption>{m["caption"]}</figcaption>' if m.get('caption') else ''
+            out.append(
+                f'<figure><img src="{url}" alt="{alt}" '
+                f'loading="lazy" decoding="async">{cap}</figure>'
+            )
+        elif t == 'youtube':
+            out.append(
+                '<div class="video"><iframe '
+                f'src="https://www.youtube-nocookie.com/embed/{m["id"]}" '
+                'title="YouTube video" allow="accelerometer; autoplay; '
+                'clipboard-write; encrypted-media; gyroscope; picture-in-picture" '
+                'allowfullscreen loading="lazy"></iframe></div>'
+            )
+    out.append('</div>')
+    return '\n'.join(out)
+    
 if __name__ == '__main__':
     generate_site()
