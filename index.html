@@ -1,23 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CitronesLab</title>
-    <style>
-        body { font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
-        .card { border: 1px solid #e0e0e0; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .card h2 { margin-top: 0; }
-        .card a { color: #0366d6; text-decoration: none; font-weight: bold; }
-        .card a:hover { text-decoration: underline; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CitronesLab</title>
+<style>
+  :root { --accent:#e8a33d; --bg:#0f0f12; --card:#1a1a20; --text:#eaeaea; --muted:#9a9aa5; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; margin:0; background:var(--bg); color:var(--text); line-height:1.6; }
+  header { padding:48px 20px 24px; text-align:center; border-bottom:1px solid #2a2a33; }
+  header h1 { margin:0; font-size:2.6rem; letter-spacing:1px; }
+  header h1 span { color:var(--accent); }
+  header p { color:var(--muted); max-width:620px; margin:10px auto 0; }
+  main { max-width:1000px; margin:0 auto; padding:32px 20px 64px; }
+  .grid { display:grid; gap:24px; grid-template-columns:repeat(auto-fill, minmax(290px,1fr)); }
+  .card { background:var(--card); border:1px solid #2a2a33; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; transition:transform .15s, border-color .15s; }
+  .card:hover { transform:translateY(-3px); border-color:var(--accent); }
+  .card .cover { width:100%; aspect-ratio:16/9; object-fit:cover; background:#222; display:block; }
+  .card .body { padding:18px; flex:1; display:flex; flex-direction:column; }
+  .card .count { font-size:.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:1px; }
+  .card h2 { margin:4px 0 8px; font-size:1.2rem; }
+  .card h2 a { color:var(--text); text-decoration:none; }
+  .card h2 a:hover { color:var(--accent); }
+  .card .date { font-size:.82rem; color:var(--muted); margin-bottom:8px; }
+  .card .preview { color:var(--muted); font-size:.92rem; flex:1; margin:0; }
+  .card .more { margin-top:14px; color:var(--accent); text-decoration:none; font-weight:600; font-size:.9rem; }
+  footer { text-align:center; padding:32px 20px; color:var(--muted); border-top:1px solid #2a2a33; font-size:.85rem; }
+</style>
 </head>
 <body>
+  <header>
     <h1>CitronesLab</h1>
-    <p>Bienvenido a mi bitácora de temas independientes.</p>
-    <hr>
-    <div id="topics">
+    <p>Bitácora de proyectos DIY que avanzo en paralelo: electrónica, código y experimentos cítricos.</p>
+  </header>
+  <main>
+    <div class="grid">
+      
+        <div class="card">
+          <img class="cover" src="https://picsum.photos/seed/huerto/800/450" alt="Huerto Inteligente" loading="lazy">
+          <div class="body">
+            <div class="count">8 entradas</div>
+            <h2><a href="posts/huerto-inteligente.html">Huerto Inteligente</a></h2>
+            <div class="date">Última: 12 de marzo de 2025 &mdash; Sensores calibrados y primer riego automático</div>
+            <p class="preview">Después de varias iteraciones logré calibrar los sensores capacitivos de humedad usando una curva de dos puntos. El ESP32 ya dispara la bomba cuando el…</p>
+            <a class="more" href="posts/huerto-inteligente.html">Ver proyecto &rarr;</a>
+          </div>
+        </div>
+        
+
+        <div class="card">
+          <img class="cover" src="https://picsum.photos/seed/synth/800/450" alt="Sintetizador Cítrico" loading="lazy">
+          <div class="body">
+            <div class="count">3 entradas</div>
+            <h2><a href="posts/sintetizador-citrico.html">Sintetizador Cítrico</a></h2>
+            <div class="date">Última: 5 de marzo de 2025 &mdash; Secuenciador básico funcionando</div>
+            <p class="preview">El secuenciador de 8 pasos ya recorre notas. Aquí suena por primera vez con el filtro abierto:</p>
+            <a class="more" href="posts/sintetizador-citrico.html">Ver proyecto &rarr;</a>
+          </div>
+        </div>
+        
+
+        <div class="card">
+          <img class="cover" src="https://picsum.photos/seed/mesa/800/450" alt="Mesa de Trabajo" loading="lazy">
+          <div class="body">
+            <div class="count">2 entradas</div>
+            <h2><a href="posts/mesa-trabajo.html">Mesa de Trabajo</a></h2>
+            <div class="date">Última: 22 de enero de 2025 &mdash; Estructura de madera terminada</div>
+            <p class="preview">El banco aguanta sin problema el osciloscopio y la fuente. Le puse una regleta con interruptor en la parte trasera.</p>
+            <a class="more" href="posts/mesa-trabajo.html">Ver proyecto &rarr;</a>
+          </div>
+        </div>
         
     </div>
+  </main>
+  <footer>CitronesLab &mdash; bitácora de proyectos en paralelo</footer>
 </body>
 </html>
