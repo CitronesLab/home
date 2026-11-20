@@ -3,9 +3,9 @@
   "site_description": "Bitácora de avances en los distintos proyectos: electrónica, código y experimentos cítricos.",
   "projects": [
     {
-      "id": "huerto-inteligente",
-      "title": "Huerto Inteligente",
-      "description": "Sistema de riego automatizado con sensores de humedad, ESP32 y panel solar.",
+      "id": "xm-v6",
+      "title": "XM V6 Exclusive",
+      "description": "Reconstitución de Citroen XM encontrado desarmado y en abandono.",
       "cover": "https://picsum.photos/seed/huerto/800/450",
       "entries": [
         {
@@ -73,9 +73,9 @@
       ]
     },
     {
-      "id": "sintetizador-citrico",
-      "title": "Sintetizador Cítrico",
-      "description": "Sintetizador analógico-experimental con frutas como resistencias variables.",
+      "id": "cx-pallas",
+      "title": "CX Pallas '81",
+      "description": "Encontrado en una parcela y se reconstituirá completo.",
       "cover": "https://picsum.photos/seed/synth/800/450",
       "entries": [
         {
