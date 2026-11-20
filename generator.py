@@ -51,8 +51,7 @@ def render_media(media, project_id, fallback_alt=''):
     out.append('</div>')
     return '\n'.join(out)
 
-def render_entry(entry):
-    def render_entry(entry, project_id):
+def render_entry(entry, project_id):
     return f"""
     <article class="entry">
       <div class="entry-date">{format_date(entry.get('date', ''))}</div>
@@ -87,18 +86,20 @@ def generate_site():
     cards = []
 
     for p in projects:
-        img_dir = os.path.join('images', pid)
-        os.makedirs(img_dir, exist_ok=True)
-        gitkeep = os.path.join(img_dir, '.gitkeep')
-        if not os.path.exists(gitkeep):
-            open(gitkeep, 'w').close()
-    
         pid     = p['id']
         ptitle  = p['title']
         pdesc   = p.get('description', '')
         cover   = p.get('cover', '')
         entries = sorted(p.get('entries', []),
                          key=lambda e: e.get('date', ''), reverse=True)
+
+        img_dir = os.path.join('images', pid)
+        os.makedirs(img_dir, exist_ok=True)
+        gitkeep = os.path.join(img_dir, '.gitkeep')
+        if not os.path.exists(gitkeep):
+            open(gitkeep, 'w').close()
+    
+        
 
         # ----- Tarjeta del home -----
         count = len(entries)
